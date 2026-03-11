@@ -1,0 +1,420 @@
+{
+  "tasks": [
+    {
+      "id": "42aaeb4a-4dbc-4512-a677-88c682afe659",
+      "name": "프로젝트 구조 및 라우팅 설정",
+      "description": "Next.js App Router 기반 전체 라우트 구조를 생성하고, 모든 주요 페이지의 빈 껍데기 파일 및 공통 레이아웃(헤더, 푸터)을 구현한다. 현재 src/app/에는 기본 파일만 존재하므로 견적서 뷰어(/invoice/[id]), 에러 페이지, 로딩 상태 등의 라우트를 추가한다.",
+      "notes": "모든 페이지는 최소한의 자리표시 텍스트만 포함. error.tsx는 반드시 'use client' 디렉티브 필요. blueprint.md 업데이트 필요.",
+      "status": "completed",
+      "dependencies": [],
+      "createdAt": "2026-03-11T13:17:49.955Z",
+      "updatedAt": "2026-03-11T13:21:15.911Z",
+      "relatedFiles": [
+        {
+          "path": "src/app/layout.tsx",
+          "type": "TO_MODIFY",
+          "description": "루트 레이아웃 - 헤더/푸터 추가"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "type": "TO_MODIFY",
+          "description": "홈 페이지 - 견적서 목록 자리표시로 수정"
+        },
+        {
+          "path": "src/app/not-found.tsx",
+          "type": "CREATE",
+          "description": "글로벌 404 페이지"
+        },
+        {
+          "path": "src/app/error.tsx",
+          "type": "CREATE",
+          "description": "글로벌 에러 페이지"
+        },
+        {
+          "path": "src/app/loading.tsx",
+          "type": "CREATE",
+          "description": "글로벌 로딩 상태"
+        },
+        {
+          "path": "src/app/invoice/[id]/page.tsx",
+          "type": "CREATE",
+          "description": "견적서 뷰어 페이지"
+        },
+        {
+          "path": "src/app/invoice/[id]/not-found.tsx",
+          "type": "CREATE",
+          "description": "견적서 not-found"
+        },
+        {
+          "path": "src/app/invoice/[id]/error.tsx",
+          "type": "CREATE",
+          "description": "견적서 에러 페이지"
+        },
+        {
+          "path": "src/app/invoice/[id]/loading.tsx",
+          "type": "CREATE",
+          "description": "견적서 로딩 상태"
+        },
+        {
+          "path": "docs/ROADMAP.md",
+          "type": "REFERENCE",
+          "description": "로드맵 참조"
+        },
+        {
+          "path": "docs/PRD.md",
+          "type": "REFERENCE",
+          "description": "PRD 메뉴 구조 참조"
+        }
+      ],
+      "implementationGuide": "1단계: 디렉토리 생성\n- src/components/ 디렉토리 생성\n- src/lib/ 디렉토리 생성\n- src/types/ 디렉토리 생성\n- src/app/invoice/[id]/ 디렉토리 생성\n\n2단계: 공통 레이아웃 구현\n- src/app/layout.tsx 수정: header(사이트명 'invoice-web', 홈 링크), main(children), footer(저작권) 포함\n- Tailwind CSS 기본 유틸리티만 사용 (shadcn/ui는 Task 003에서 설치)\n- Server Component 유지\n\n3단계: 라우트별 페이지 껍데기 생성\n- src/app/page.tsx: 홈 페이지 자리표시 텍스트 ('견적서 목록' 제목)\n- src/app/not-found.tsx: 글로벌 404 페이지\n- src/app/error.tsx: 글로벌 에러 페이지 ('use client' 필수)\n- src/app/loading.tsx: 글로벌 로딩 상태\n- src/app/invoice/[id]/page.tsx: 견적서 뷰어 (params에서 id 받기, 자리표시)\n- src/app/invoice/[id]/not-found.tsx: 견적서 not-found\n- src/app/invoice/[id]/error.tsx: 견적서 에러 ('use client' 필수)\n- src/app/invoice/[id]/loading.tsx: 견적서 로딩\n\n4단계: npm run lint && npm run build 통과 확인",
+      "verificationCriteria": "1. / 경로에서 견적서 목록 자리표시 렌더링 확인\n2. /invoice/test-id 경로에서 견적서 뷰어 자리표시 렌더링 확인\n3. 존재하지 않는 경로 접근 시 not-found 페이지 표시\n4. 공통 레이아웃(헤더, 푸터) 모든 페이지에 적용 확인\n5. npm run lint 통과\n6. npm run build 통과",
+      "analysisResult": "Phase 1: 애플리케이션 골격 구축. Next.js 16 App Router 기반 프로젝트의 라우팅 구조, 공통 레이아웃, 타입 정의, 데이터 모델을 설계한다. 현재 src/app/에는 page.tsx, layout.tsx, globals.css, favicon.ico만 존재하며, shadcn/ui 등 UI 라이브러리는 미설치 상태. Tailwind CSS v4 사용 중. TypeScript strict 모드. 경로 별칭 @/* -> ./src/*",
+      "summary": "Next.js App Router 기반 프로젝트 구조 및 라우팅 설정 완료. 생성된 항목: src/components/, src/lib/, src/types/ 디렉토리, 공통 레이아웃(헤더/푸터), 홈 페이지(/), 견적서 뷰어(/invoice/[id]), 글로벌 및 견적서별 not-found/error/loading 페이지. error.tsx에 use client 디렉티브 적용. npm run lint 및 npm run build 모두 통과. 모든 페이지는 자리표시 텍스트만 포함하며 UI는 Phase 2에서 구현 예정.",
+      "completedAt": "2026-03-11T13:21:15.891Z"
+    },
+    {
+      "id": "dc260411-145e-431f-b626-e32823bedc9f",
+      "name": "타입 정의 및 데이터 모델 설계",
+      "description": "PRD 데이터 모델 기반으로 TypeScript 인터페이스(Invoice, InvoiceItem, SupplierInfo), Zod 스키마, 환경변수 설정 유틸리티, 노션 API 매퍼 타입을 정의한다. Zod를 설치하고 데이터 검증 기반을 구축한다.",
+      "notes": "PRD 데이터 모델 참조: docs/PRD.md 126-163줄. 노션 API SDK(@notionhq/client)는 Task 007에서 설치하므로 매퍼는 일반 타입으로 정의. Zod 스키마에서 타입을 추론하여 인터페이스와 중복 방지 권장.",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "42aaeb4a-4dbc-4512-a677-88c682afe659"
+        }
+      ],
+      "createdAt": "2026-03-11T13:17:49.955Z",
+      "updatedAt": "2026-03-11T13:17:49.955Z",
+      "relatedFiles": [
+        {
+          "path": "src/types/invoice.ts",
+          "type": "CREATE",
+          "description": "Invoice, InvoiceItem, SupplierInfo 인터페이스"
+        },
+        {
+          "path": "src/types/index.ts",
+          "type": "CREATE",
+          "description": "타입 배럴 export"
+        },
+        {
+          "path": "src/lib/schemas.ts",
+          "type": "CREATE",
+          "description": "Zod 스키마 정의"
+        },
+        {
+          "path": "src/lib/config.ts",
+          "type": "CREATE",
+          "description": "환경변수 설정 유틸리티"
+        },
+        {
+          "path": "src/lib/notion-mapper.ts",
+          "type": "CREATE",
+          "description": "노션 API 매퍼 타입"
+        },
+        {
+          "path": ".env.example",
+          "type": "CREATE",
+          "description": "환경변수 템플릿"
+        },
+        {
+          "path": "docs/PRD.md",
+          "type": "REFERENCE",
+          "description": "데이터 모델 참조",
+          "lineStart": 126,
+          "lineEnd": 163
+        }
+      ],
+      "implementationGuide": "1단계: zod 설치\n- npm install zod\n\n2단계: TypeScript 인터페이스 정의 (src/types/invoice.ts)\n- InvoiceStatus = 'draft' | 'published' | 'completed'\n- InvoiceItem: { id: string, name: string, quantity: number, unitPrice: number, amount: number, description: string }\n- Invoice: { id: string, title: string, clientName: string, issueDate: string, validUntil: string, status: InvoiceStatus, items: InvoiceItem[], totalAmount: number, notes: string }\n- SupplierInfo: { name: string, email: string, phone: string, address: string }\n- InvoiceListItem: { id: string, title: string, clientName: string, issueDate: string, totalAmount: number, status: InvoiceStatus }\n- src/types/index.ts: 배럴 export\n\n3단계: Zod 스키마 (src/lib/schemas.ts)\n- invoiceItemSchema, invoiceSchema, supplierInfoSchema 정의\n- z.infer<> 타입 추론 활용\n\n4단계: 환경변수 설정 (src/lib/config.ts)\n- getConfig() 함수: NOTION_API_KEY, NOTION_DATABASE_ID, SUPPLIER_NAME/EMAIL/PHONE/ADDRESS\n- 환경변수 누락 시 명확한 에러 throw\n- .env.example 템플릿 파일 생성\n\n5단계: 노션 매퍼 타입 (src/lib/notion-mapper.ts)\n- NotionPageProperties 타입 정의 (노션 API 응답 구조)\n- mapNotionPageToInvoice, mapNotionPageToInvoiceListItem 함수 시그니처만 정의 (구현은 Task 007)\n\n6단계: npm run lint && npm run build 통과 확인",
+      "verificationCriteria": "1. Invoice, InvoiceItem, SupplierInfo 타입이 import 가능\n2. Zod 스키마로 유효한 데이터 검증 통과\n3. Zod 스키마로 필수 필드 누락 데이터 검증 실패\n4. getConfig() 호출 시 환경변수 타입 안전하게 반환\n5. 환경변수 누락 시 명확한 에러 throw\n6. npm run lint 통과\n7. npm run build 통과",
+      "analysisResult": "Phase 1: 애플리케이션 골격 구축. Next.js 16 App Router 기반 프로젝트의 라우팅 구조, 공통 레이아웃, 타입 정의, 데이터 모델을 설계한다. 현재 src/app/에는 page.tsx, layout.tsx, globals.css, favicon.ico만 존재하며, shadcn/ui 등 UI 라이브러리는 미설치 상태. Tailwind CSS v4 사용 중. TypeScript strict 모드. 경로 별칭 @/* -> ./src/*"
+    },
+    {
+      "id": "1ce3b985-331a-4900-8379-e21e7345dd43",
+      "name": "shadcn/ui 기반 공통 컴포넌트 구현",
+      "description": "shadcn/ui 설치 및 초기 설정, Lucide React 아이콘, 견적서 전용 공통 컴포넌트(InvoiceHeader, InvoiceItemTable, InvoiceSummary, SupplierInfoCard) 구현, 더미 데이터 생성 유틸리티 작성",
+      "notes": "Tailwind CSS v4 환경이므로 shadcn/ui 설정 시 v4 호환 확인 필요. 컴포넌트는 Server Component 기본.",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "dc260411-145e-431f-b626-e32823bedc9f"
+        }
+      ],
+      "createdAt": "2026-03-11T13:24:40.297Z",
+      "updatedAt": "2026-03-11T13:24:40.297Z",
+      "relatedFiles": [
+        {
+          "path": "src/components/invoice/",
+          "type": "CREATE",
+          "description": "견적서 전용 컴포넌트 디렉토리"
+        },
+        {
+          "path": "src/lib/mock-data.ts",
+          "type": "CREATE",
+          "description": "더미 데이터"
+        }
+      ],
+      "implementationGuide": "1. shadcn/ui CLI로 초기화 및 Button, Table, Card, Badge 컴포넌트 설치\n2. lucide-react 설치\n3. src/components/invoice/ 디렉토리에 InvoiceHeader, InvoiceItemTable, InvoiceSummary, SupplierInfoCard 컴포넌트 생성\n4. src/lib/mock-data.ts에 더미 Invoice, InvoiceItem, SupplierInfo 데이터 작성\n5. npm run lint && npm run build 통과",
+      "verificationCriteria": "shadcn/ui 컴포넌트 정상 렌더링, 더미 데이터로 각 컴포넌트 표시 확인, lint/build 통과",
+      "analysisResult": "invoice-web MVP: 노션 기반 견적서 공유 시스템. Next.js 16 App Router, React 19, Tailwind CSS v4, TypeScript strict. Phase 1(골격) 진행 중, Phase 2~4 작업 추가 등록."
+    },
+    {
+      "id": "a438a596-cb45-4dd4-882e-6758e464e214",
+      "name": "견적서 뷰어 페이지 UI 구현",
+      "description": "/invoice/[id] 페이지 전체 UI: 견적서 헤더(제목, 발행일, 유효기간, 상태), 공급자/수신자 정보 카드, 견적 항목 테이블, 소계/VAT/합계, 비고, PDF 다운로드 버튼(UI만), 인쇄 스타일",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "1ce3b985-331a-4900-8379-e21e7345dd43"
+        }
+      ],
+      "createdAt": "2026-03-11T13:24:40.297Z",
+      "updatedAt": "2026-03-11T13:24:40.297Z",
+      "relatedFiles": [
+        {
+          "path": "src/app/invoice/[id]/page.tsx",
+          "type": "TO_MODIFY",
+          "description": "견적서 뷰어 페이지"
+        }
+      ],
+      "implementationGuide": "1. /invoice/[id]/page.tsx에서 더미 데이터 import하여 전체 레이아웃 구성\n2. InvoiceHeader: 제목, 발행일, 유효기간, 상태 Badge\n3. SupplierInfoCard + 수신자 정보 카드 나란히 배치\n4. InvoiceItemTable: 품목명, 수량, 단가, 금액 테이블\n5. InvoiceSummary: 소계, VAT(10%), 합계\n6. 비고/메모 섹션\n7. PDF 다운로드 버튼 (onClick 미연결)\n8. @media print 스타일 적용\n9. lint/build 통과",
+      "verificationCriteria": "더미 데이터로 견적서 전체 UI 렌더링, 인쇄 미리보기에서 깔끔한 레이아웃, lint/build 통과",
+      "analysisResult": "invoice-web MVP: 노션 기반 견적서 공유 시스템. Next.js 16 App Router, React 19, Tailwind CSS v4, TypeScript strict. Phase 1(골격) 진행 중, Phase 2~4 작업 추가 등록."
+    },
+    {
+      "id": "a2b0610a-974a-49d3-95eb-3d5bbe3e1fab",
+      "name": "견적서 목록 페이지 UI 구현",
+      "description": "/ 루트 페이지: 견적서 목록 테이블(제목, 클라이언트명, 발행일, 금액, 상태), 뷰어 URL 표시/복사 버튼, 뷰어 이동 링크, 최신순 정렬, 반응형 디자인",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "1ce3b985-331a-4900-8379-e21e7345dd43"
+        }
+      ],
+      "createdAt": "2026-03-11T13:24:40.297Z",
+      "updatedAt": "2026-03-11T13:24:40.297Z",
+      "relatedFiles": [
+        {
+          "path": "src/app/page.tsx",
+          "type": "TO_MODIFY",
+          "description": "홈/목록 페이지"
+        }
+      ],
+      "implementationGuide": "1. src/app/page.tsx에서 더미 목록 데이터 표시\n2. shadcn Table로 목록 렌더링 (제목, 클라이언트, 발행일, 금액, 상태 Badge)\n3. 각 행에 뷰어 URL 표시 및 복사 버튼 (Client Component)\n4. 견적서 제목 클릭 시 /invoice/[id]로 이동\n5. 최신 발행일순 정렬\n6. 모바일 반응형 레이아웃\n7. lint/build 통과",
+      "verificationCriteria": "더미 데이터로 목록 테이블 렌더링, 뷰어 링크 동작, 모바일 뷰포트 정상 표시, lint/build 통과",
+      "analysisResult": "invoice-web MVP: 노션 기반 견적서 공유 시스템. Next.js 16 App Router, React 19, Tailwind CSS v4, TypeScript strict. Phase 1(골격) 진행 중, Phase 2~4 작업 추가 등록."
+    },
+    {
+      "id": "9c1c47fa-365e-48d7-b0a6-084b7793352a",
+      "name": "에러 페이지 및 로딩 상태 UI 구현",
+      "description": "not-found.tsx, error.tsx에 shadcn/ui + Lucide 아이콘 적용한 완성 UI, 오류 유형별 안내 메시지, 홈 이동 버튼, 관리자 연락처, loading.tsx 스켈레톤 컴포넌트, 에러 코드 표시",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "1ce3b985-331a-4900-8379-e21e7345dd43"
+        }
+      ],
+      "createdAt": "2026-03-11T13:25:04.545Z",
+      "updatedAt": "2026-03-11T13:25:04.545Z",
+      "relatedFiles": [
+        {
+          "path": "src/app/not-found.tsx",
+          "type": "TO_MODIFY",
+          "description": "글로벌 404"
+        },
+        {
+          "path": "src/app/error.tsx",
+          "type": "TO_MODIFY",
+          "description": "글로벌 에러"
+        },
+        {
+          "path": "src/app/loading.tsx",
+          "type": "TO_MODIFY",
+          "description": "글로벌 로딩"
+        },
+        {
+          "path": "src/app/invoice/[id]/not-found.tsx",
+          "type": "TO_MODIFY",
+          "description": "견적서 404"
+        },
+        {
+          "path": "src/app/invoice/[id]/error.tsx",
+          "type": "TO_MODIFY",
+          "description": "견적서 에러"
+        },
+        {
+          "path": "src/app/invoice/[id]/loading.tsx",
+          "type": "TO_MODIFY",
+          "description": "견적서 로딩"
+        }
+      ],
+      "implementationGuide": "1. src/app/not-found.tsx: Lucide 아이콘, 안내 메시지, 홈 링크 버튼\n2. src/app/error.tsx: 오류 유형 아이콘, 에러 코드, 다시 시도 버튼, 관리자 연락처\n3. src/app/loading.tsx: 스켈레톤 UI (Card, Table placeholder)\n4. src/app/invoice/[id]/ 하위 not-found, error, loading도 동일 패턴 적용\n5. lint/build 통과",
+      "verificationCriteria": "에러/로딩 페이지 UI 완성, 스켈레톤 애니메이션 동작, lint/build 통과",
+      "analysisResult": "invoice-web MVP 계속: Phase 2 나머지 + Phase 3 작업 등록"
+    },
+    {
+      "id": "1ba8e26e-0805-429e-882c-276d9b51294e",
+      "name": "노션 API 연동 및 데이터 페칭",
+      "description": "@notionhq/client SDK 설치, 노션 클라이언트 초기화, DB 전체 목록 조회(F011), 개별 견적서 조회(F001), 매퍼 함수 구현, Zod 검증, 더미 데이터를 실제 API로 교체",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "a438a596-cb45-4dd4-882e-6758e464e214"
+        },
+        {
+          "taskId": "a2b0610a-974a-49d3-95eb-3d5bbe3e1fab"
+        }
+      ],
+      "createdAt": "2026-03-11T13:25:04.545Z",
+      "updatedAt": "2026-03-11T13:25:04.545Z",
+      "relatedFiles": [
+        {
+          "path": "src/lib/notion.ts",
+          "type": "CREATE",
+          "description": "노션 클라이언트 및 API 함수"
+        },
+        {
+          "path": "src/lib/notion-mapper.ts",
+          "type": "TO_MODIFY",
+          "description": "매퍼 함수 구현"
+        }
+      ],
+      "implementationGuide": "1. npm install @notionhq/client\n2. src/lib/notion.ts: Client 초기화, queryDatabase, getPage 함수\n3. src/lib/notion-mapper.ts: mapNotionPageToInvoice, mapNotionPageToInvoiceListItem 구현\n4. Zod 스키마로 API 응답 검증\n5. page.tsx에서 더미 데이터를 실제 API 호출로 교체\n6. lint/build 통과",
+      "verificationCriteria": "노션 API로 실제 데이터 조회 및 UI 렌더링 확인, 유효/무효 ID 접근 테스트, lint/build 통과",
+      "analysisResult": "invoice-web MVP 계속: Phase 2 나머지 + Phase 3 작업 등록"
+    },
+    {
+      "id": "00a0189a-e6ff-4cc1-b0ab-829029893326",
+      "name": "에러 처리 및 예외 관리 구현",
+      "description": "노션 API 오류 핸들링(네트워크, 인증, rate limit), not-found 처리(F010), 데이터 검증 실패 처리, Error Boundary, 사용자 친화적 에러 메시지 매핑",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "1ba8e26e-0805-429e-882c-276d9b51294e"
+        }
+      ],
+      "createdAt": "2026-03-11T13:25:04.545Z",
+      "updatedAt": "2026-03-11T13:25:04.545Z",
+      "relatedFiles": [
+        {
+          "path": "src/lib/errors.ts",
+          "type": "CREATE",
+          "description": "커스텀 에러 클래스"
+        },
+        {
+          "path": "src/lib/notion.ts",
+          "type": "TO_MODIFY",
+          "description": "에러 핸들링 추가"
+        }
+      ],
+      "implementationGuide": "1. src/lib/errors.ts: 커스텀 에러 클래스 (NotionApiError, InvoiceNotFoundError, ValidationError)\n2. src/lib/notion.ts에 try-catch 및 에러 변환 로직 추가\n3. 각 page.tsx에서 에러 시 notFound() 또는 throw 처리\n4. error.tsx에서 에러 유형별 메시지 분기\n5. lint/build 통과",
+      "verificationCriteria": "API 오류 시 적절한 에러 페이지 표시, 무효 ID 시 not-found, 인증 오류 시 에러 메시지, lint/build 통과",
+      "analysisResult": "invoice-web MVP 계속: Phase 2 나머지 + Phase 3 작업 등록"
+    },
+    {
+      "id": "5ce9adb7-e68d-4198-9083-7e01113773fe",
+      "name": "PDF 다운로드 기능 구현",
+      "description": "PDF 생성 라이브러리 설치, 견적서 데이터를 PDF로 변환, PDF 레이아웃(헤더, 항목 테이블, 합계, 공급자 정보), 다운로드 버튼 연결, 파일명 규칙 적용(견적서_[클라이언트명]_[발행일].pdf)",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "00a0189a-e6ff-4cc1-b0ab-829029893326"
+        }
+      ],
+      "createdAt": "2026-03-11T13:25:25.895Z",
+      "updatedAt": "2026-03-11T13:25:25.895Z",
+      "relatedFiles": [
+        {
+          "path": "src/components/invoice/InvoicePdf.tsx",
+          "type": "CREATE",
+          "description": "PDF 문서 컴포넌트"
+        },
+        {
+          "path": "src/app/invoice/[id]/page.tsx",
+          "type": "TO_MODIFY",
+          "description": "다운로드 버튼 연결"
+        }
+      ],
+      "implementationGuide": "1. PDF 라이브러리 선정 및 설치 (@react-pdf/renderer 또는 html2canvas + jsPDF)\n2. src/components/invoice/InvoicePdf.tsx: PDF 문서 컴포넌트\n3. PDF 레이아웃: 헤더, 공급자/수신자 정보, 항목 테이블, 소계/VAT/합계\n4. 다운로드 버튼 Client Component에서 onClick 핸들러 연결\n5. 파일명: 견적서_[clientName]_[issueDate].pdf\n6. lint/build 통과",
+      "verificationCriteria": "PDF 다운로드 버튼 클릭 시 파일 생성, PDF 내 모든 견적서 항목 포함, 파일명 규칙 준수, lint/build 통과",
+      "analysisResult": "invoice-web MVP 계속: Phase 3 나머지(PDF, 통합테스트) + Phase 4(최적화, UX, 배포) 등록"
+    },
+    {
+      "id": "11c2d41a-2641-4f57-a7ab-58b3e9d24575",
+      "name": "핵심 기능 통합 테스트",
+      "description": "Playwright MCP 전체 사용자 플로우 E2E 테스트: 목록 조회 -> 견적서 열기 -> PDF 다운로드, 에러 핸들링, 반응형 레이아웃, 경계값 테스트",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "5ce9adb7-e68d-4198-9083-7e01113773fe"
+        }
+      ],
+      "createdAt": "2026-03-11T13:25:25.895Z",
+      "updatedAt": "2026-03-11T13:25:25.895Z",
+      "relatedFiles": [],
+      "implementationGuide": "1. 전체 플로우 E2E: 목록 페이지 -> 견적서 클릭 -> 뷰어 확인 -> PDF 다운로드\n2. 노션 API 데이터 렌더링 검증\n3. 에러 핸들링: 잘못된 ID, 빈 데이터 시 UI 확인\n4. 반응형: 데스크톱/모바일 뷰포트\n5. 경계값: 빈 항목 목록, 장문 텍스트, 특수문자\n6. 테스트 결과 기록",
+      "verificationCriteria": "전체 E2E 플로우 통과, 에러 케이스 처리 확인, 반응형 정상 동작",
+      "analysisResult": "invoice-web MVP 계속: Phase 3 나머지(PDF, 통합테스트) + Phase 4(최적화, UX, 배포) 등록"
+    },
+    {
+      "id": "b8dad556-6848-4914-94a0-06f66f938a2d",
+      "name": "성능 최적화",
+      "description": "노션 API 캐싱 전략(Next.js revalidate), Server Component 데이터 페칭 최적화, 견적서별 동적 메타데이터(SEO), 이미지/정적 자산 최적화, URL 복사 기능(클립보드 복사 + 토스트 알림), 전체 UX 점검",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "11c2d41a-2641-4f57-a7ab-58b3e9d24575"
+        }
+      ],
+      "createdAt": "2026-03-11T13:27:45.222Z",
+      "updatedAt": "2026-03-11T13:27:45.222Z",
+      "relatedFiles": [
+        {
+          "path": "src/app/invoice/[id]/page.tsx",
+          "type": "TO_MODIFY",
+          "description": "캐싱, 메타데이터, 복사 버튼"
+        },
+        {
+          "path": "src/app/page.tsx",
+          "type": "TO_MODIFY",
+          "description": "복사 버튼"
+        },
+        {
+          "path": "src/lib/notion.ts",
+          "type": "TO_MODIFY",
+          "description": "캐싱 전략"
+        }
+      ],
+      "implementationGuide": "1. fetch에 revalidate 옵션 설정 (ISR)\n2. generateMetadata로 견적서별 동적 title/description\n3. next/image 최적화\n4. navigator.clipboard.writeText로 URL 복사 + 토스트 알림\n5. 견적서 목록/뷰어 페이지에 복사 버튼 추가\n6. 전체 UX 점검: 간격, 폰트, 색상 일관성\n7. lint/build 통과",
+      "verificationCriteria": "캐싱 동작 확인, 메타태그 정상 생성, URL 복사 동작, 토스트 알림 표시, lint/build 통과",
+      "analysisResult": "invoice-web MVP Phase 5: 최적화 및 Vercel 배포. 기존 Phase 4(성능최적화/UX개선/배포) 3개 작업을 2개로 간소화."
+    },
+    {
+      "id": "235ebba3-cc24-4d48-8885-ddefb47aab7b",
+      "name": "Vercel 배포",
+      "description": "Vercel 배포 설정, 환경변수 설정 가이드 작성, 프로덕션 빌드 테스트 및 검증, 배포 후 전체 기능 E2E 테스트",
+      "status": "pending",
+      "dependencies": [
+        {
+          "taskId": "b8dad556-6848-4914-94a0-06f66f938a2d"
+        }
+      ],
+      "createdAt": "2026-03-11T13:27:45.223Z",
+      "updatedAt": "2026-03-11T13:27:45.223Z",
+      "relatedFiles": [
+        {
+          "path": "package.json",
+          "type": "TO_MODIFY",
+          "description": "빌드 스크립트"
+        },
+        {
+          "path": ".env.example",
+          "type": "TO_MODIFY",
+          "description": "환경변수 가이드"
+        }
+      ],
+      "implementationGuide": "1. vercel.json 설정 (필요 시)\n2. README.md에 환경변수 가이드 (NOTION_API_KEY, NOTION_DATABASE_ID, 공급자 정보)\n3. npm run build 프로덕션 빌드 검증\n4. Vercel에 프로젝트 연결 및 환경변수 설정\n5. 배포 후 전체 E2E 테스트\n6. 최종 문서 정리",
+      "verificationCriteria": "프로덕션 빌드 성공, Vercel 배포 정상 동작, 환경변수 가이드 완성, 전체 E2E 통과",
+      "analysisResult": "invoice-web MVP Phase 5: 최적화 및 Vercel 배포. 기존 Phase 4(성능최적화/UX개선/배포) 3개 작업을 2개로 간소화."
+    }
+  ]
+}
