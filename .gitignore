@@ -47,7 +47,6 @@ next-env.d.ts
 
 # shrimp task manager
 shrimp-rules.md
-shrimp_data/
 
 # project docs (generated)
 docs/PRD.md
