@@ -63,23 +63,25 @@ invoice-web은 1인 개발자(관리자)와 견적서 수신 클라이언트를 
 
 ## 개발 단계
 
-### Phase 1: 애플리케이션 골격 구축
+### Phase 1: 애플리케이션 골격 구축 ✅
 
-- **Task 001: 프로젝트 구조 및 라우팅 설정** - 우선순위
-  - Next.js App Router 기반 전체 라우트 구조 생성 (`/`, `/invoice/[id]`)
-  - 모든 주요 페이지의 빈 껍데기 파일 생성 (`page.tsx`, `layout.tsx`, `not-found.tsx`, `error.tsx`)
-  - 공통 레이아웃 컴포넌트 골격 구현 (헤더, 푸터 포함)
-  - `/components`, `/lib`, `/types` 디렉토리 구조 생성
+- **Task 001: 프로젝트 구조 및 라우팅 설정** ✅ - 완료
+  - See: `/tasks/001-project-structure.md`
+  - ✅ Next.js App Router 기반 전체 라우트 구조 생성 (`/`, `/invoice/[id]`)
+  - ✅ 모든 주요 페이지의 빈 껍데기 파일 생성 (`page.tsx`, `layout.tsx`, `not-found.tsx`, `error.tsx`)
+  - ✅ 공통 레이아웃 컴포넌트 골격 구현 (헤더, 푸터 포함)
+  - ✅ `/components`, `/lib`, `/types` 디렉토리 구조 생성
 
-- **Task 002: 타입 정의 및 데이터 모델 설계**
-  - TypeScript 인터페이스 정의 (`Invoice`, `InvoiceItem`, `SupplierInfo`)
-  - 노션 API 응답을 앱 타입으로 변환하는 매퍼 타입 정의
-  - Zod 스키마 정의 (노션 API 응답 검증용)
-  - 환경변수 타입 정의 및 설정 유틸리티 작성 (`NOTION_API_KEY`, `NOTION_DATABASE_ID`, 공급자 정보)
+- **Task 002: 타입 정의 및 데이터 모델 설계** ✅ - 완료
+  - See: `/tasks/002-type-definitions.md`
+  - ✅ TypeScript 인터페이스 정의 (`Invoice`, `InvoiceItem`, `SupplierInfo`)
+  - ✅ 노션 API 응답을 앱 타입으로 변환하는 매퍼 타입 정의
+  - ✅ Zod 스키마 정의 (노션 API 응답 검증용)
+  - ✅ 환경변수 타입 정의 및 설정 유틸리티 작성 (`NOTION_API_KEY`, `NOTION_DATABASE_ID`, 공급자 정보)
 
 ### Phase 2: UI/UX 완성 (더미 데이터 활용)
 
-- **Task 003: shadcn/ui 기반 공통 컴포넌트 구현**
+- **Task 003: shadcn/ui 기반 공통 컴포넌트 구현** - 우선순위
   - shadcn/ui 설치 및 초기 설정 (Button, Table, Card, Badge 등)
   - Lucide React 아이콘 세트 설정
   - 견적서 전용 공통 컴포넌트 구현 (InvoiceHeader, InvoiceItemTable, InvoiceSummary, SupplierInfoCard)
@@ -158,22 +160,18 @@ invoice-web은 1인 개발자(관리자)와 견적서 수신 클라이언트를 
     - 반응형 레이아웃: 데스크톱/모바일 뷰포트에서 정상 표시 확인
     - 경계값 테스트: 빈 항목 목록, 장문 텍스트, 특수문자 입력 등
 
-### Phase 4: 고급 기능 및 최적화
+### Phase 5: 최적화 및 배포
 
-- **Task 010: 성능 최적화 및 캐싱**
-  - 노션 API 호출 캐싱 전략 구현 (Next.js ISR 또는 revalidate 설정)
-  - 이미지 및 정적 자산 최적화
+- **Task 010: 성능 최적화**
+  - 노션 API 호출 캐싱 전략 구현 (Next.js revalidate 설정)
   - Server Component 데이터 페칭 최적화
-  - 메타데이터(SEO) 설정 (견적서별 동적 메타 태그)
-
-- **Task 011: URL 복사 기능 및 UX 개선**
-  - 견적서 목록에서 공유 URL 클립보드 복사 기능 구현
-  - 복사 성공 시 토스트 알림 표시
-  - 견적서 뷰어 페이지 공유 URL 복사 버튼 추가
+  - 견적서별 동적 메타데이터(SEO) 설정
+  - 이미지 및 정적 자산 최적화
+  - URL 복사 기능 (클립보드 복사 + 토스트 알림)
   - 전체 UX 점검 및 미세 조정
 
-- **Task 012: 배포 환경 구성 및 프로덕션 준비**
+- **Task 011: Vercel 배포**
+  - Vercel 배포 설정
   - 환경변수 설정 가이드 작성 (NOTION_API_KEY, NOTION_DATABASE_ID, 공급자 정보)
-  - Firebase App Hosting 또는 Vercel 배포 설정
   - 프로덕션 빌드 테스트 및 검증
   - 배포 후 전체 기능 E2E 테스트

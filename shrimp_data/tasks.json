@@ -77,14 +77,14 @@
       "name": "타입 정의 및 데이터 모델 설계",
       "description": "PRD 데이터 모델 기반으로 TypeScript 인터페이스(Invoice, InvoiceItem, SupplierInfo), Zod 스키마, 환경변수 설정 유틸리티, 노션 API 매퍼 타입을 정의한다. Zod를 설치하고 데이터 검증 기반을 구축한다.",
       "notes": "PRD 데이터 모델 참조: docs/PRD.md 126-163줄. 노션 API SDK(@notionhq/client)는 Task 007에서 설치하므로 매퍼는 일반 타입으로 정의. Zod 스키마에서 타입을 추론하여 인터페이스와 중복 방지 권장.",
-      "status": "pending",
+      "status": "completed",
       "dependencies": [
         {
           "taskId": "42aaeb4a-4dbc-4512-a677-88c682afe659"
         }
       ],
       "createdAt": "2026-03-11T13:17:49.955Z",
-      "updatedAt": "2026-03-11T13:17:49.955Z",
+      "updatedAt": "2026-03-11T14:29:00.416Z",
       "relatedFiles": [
         {
           "path": "src/types/invoice.ts",
@@ -126,7 +126,9 @@
       ],
       "implementationGuide": "1단계: zod 설치\n- npm install zod\n\n2단계: TypeScript 인터페이스 정의 (src/types/invoice.ts)\n- InvoiceStatus = 'draft' | 'published' | 'completed'\n- InvoiceItem: { id: string, name: string, quantity: number, unitPrice: number, amount: number, description: string }\n- Invoice: { id: string, title: string, clientName: string, issueDate: string, validUntil: string, status: InvoiceStatus, items: InvoiceItem[], totalAmount: number, notes: string }\n- SupplierInfo: { name: string, email: string, phone: string, address: string }\n- InvoiceListItem: { id: string, title: string, clientName: string, issueDate: string, totalAmount: number, status: InvoiceStatus }\n- src/types/index.ts: 배럴 export\n\n3단계: Zod 스키마 (src/lib/schemas.ts)\n- invoiceItemSchema, invoiceSchema, supplierInfoSchema 정의\n- z.infer<> 타입 추론 활용\n\n4단계: 환경변수 설정 (src/lib/config.ts)\n- getConfig() 함수: NOTION_API_KEY, NOTION_DATABASE_ID, SUPPLIER_NAME/EMAIL/PHONE/ADDRESS\n- 환경변수 누락 시 명확한 에러 throw\n- .env.example 템플릿 파일 생성\n\n5단계: 노션 매퍼 타입 (src/lib/notion-mapper.ts)\n- NotionPageProperties 타입 정의 (노션 API 응답 구조)\n- mapNotionPageToInvoice, mapNotionPageToInvoiceListItem 함수 시그니처만 정의 (구현은 Task 007)\n\n6단계: npm run lint && npm run build 통과 확인",
       "verificationCriteria": "1. Invoice, InvoiceItem, SupplierInfo 타입이 import 가능\n2. Zod 스키마로 유효한 데이터 검증 통과\n3. Zod 스키마로 필수 필드 누락 데이터 검증 실패\n4. getConfig() 호출 시 환경변수 타입 안전하게 반환\n5. 환경변수 누락 시 명확한 에러 throw\n6. npm run lint 통과\n7. npm run build 통과",
-      "analysisResult": "Phase 1: 애플리케이션 골격 구축. Next.js 16 App Router 기반 프로젝트의 라우팅 구조, 공통 레이아웃, 타입 정의, 데이터 모델을 설계한다. 현재 src/app/에는 page.tsx, layout.tsx, globals.css, favicon.ico만 존재하며, shadcn/ui 등 UI 라이브러리는 미설치 상태. Tailwind CSS v4 사용 중. TypeScript strict 모드. 경로 별칭 @/* -> ./src/*"
+      "analysisResult": "Phase 1: 애플리케이션 골격 구축. Next.js 16 App Router 기반 프로젝트의 라우팅 구조, 공통 레이아웃, 타입 정의, 데이터 모델을 설계한다. 현재 src/app/에는 page.tsx, layout.tsx, globals.css, favicon.ico만 존재하며, shadcn/ui 등 UI 라이브러리는 미설치 상태. Tailwind CSS v4 사용 중. TypeScript strict 모드. 경로 별칭 @/* -> ./src/*",
+      "summary": "Task 002 타입 정의 및 데이터 모델 설계 완료. Zod 스키마를 단일 소스로 사용하여 TypeScript 타입을 z.infer로 추론하는 구조 구현. 노션 내보내기 데이터 검증을 통해 실제 DB 구조에 맞게 속성명(견적서 번호, 클라이언트명, 총 금액), 상태값(초안/발행/승인/완료), Items 별도 Relation DB 구조를 반영하여 수정 완료. 환경변수 설정 유틸리티 및 .env.example 템플릿 생성. npm run lint / build 모두 통과.",
+      "completedAt": "2026-03-11T14:29:00.398Z"
     },
     {
       "id": "1ce3b985-331a-4900-8379-e21e7345dd43",
