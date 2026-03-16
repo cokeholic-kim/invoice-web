@@ -1,4 +1,6 @@
 // 견적서 뷰어 페이지 - 특정 견적서의 전체 내용을 표시하는 Server Component
+export const dynamic = "force-dynamic";
+
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { FileText } from "lucide-react";
@@ -10,7 +12,8 @@ import {
   SupplierInfoCard,
   PdfDownloadButton,
 } from "@/components/invoice";
-import { mockInvoice, mockSupplierInfo } from "@/lib/mock-data";
+import { getInvoiceById, toUserFriendlyError } from "@/lib/notion-client";
+import { getSupplierInfo } from "@/lib/config";
 
 interface InvoicePageProps {
   params: Promise<{ id: string }>;
@@ -21,12 +24,16 @@ export async function generateMetadata({
   params,
 }: InvoicePageProps): Promise<Metadata> {
   const { id } = await params;
-  // TODO: 노션 API 연동 후 실제 데이터로 교체
-  if (id === mockInvoice.id) {
-    return {
-      title: `견적서 ${mockInvoice.invoiceNumber} | invoice-web`,
-      description: `${mockInvoice.clientName} 견적서`,
-    };
+  try {
+    const invoice = await getInvoiceById(id);
+    if (invoice) {
+      return {
+        title: `견적서 ${invoice.invoiceNumber} | invoice-web`,
+        description: `${invoice.clientName} 견적서`,
+      };
+    }
+  } catch {
+    // 메타데이터 생성 실패는 페이지 렌더링에 영향을 주지 않도록 무시
   }
   return {
     title: "견적서 | invoice-web",
@@ -36,16 +43,20 @@ export async function generateMetadata({
 export default async function InvoicePage({ params }: InvoicePageProps) {
   const { id } = await params;
 
-  // TODO: 노션 API 연동 후 실제 데이터 페칭으로 교체
-  // 현재는 더미 데이터에서 해당 ID의 견적서를 찾음
-  const invoice = id === mockInvoice.id ? mockInvoice : null;
+  let invoice;
+  try {
+    // 노션 API에서 견적서 데이터 조회
+    invoice = await getInvoiceById(id);
+  } catch (error) {
+    throw toUserFriendlyError(error);
+  }
 
   // 견적서를 찾을 수 없으면 not-found 페이지로 이동
   if (!invoice) {
     notFound();
   }
 
-  const supplier = mockSupplierInfo;
+  const supplier = getSupplierInfo();
 
   return (
     <>

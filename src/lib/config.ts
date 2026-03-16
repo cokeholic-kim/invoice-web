@@ -36,6 +36,11 @@ export function getNotionDatabaseId(): string {
   return requireEnv("NOTION_DATABASE_ID");
 }
 
+/** 노션 항목(Items) 데이터베이스 ID (선택적 — relation에서 개별 조회 시 불필요) */
+export function getNotionItemsDatabaseId(): string | undefined {
+  return process.env.NOTION_ITEMS_DATABASE_ID ?? undefined;
+}
+
 // ─────────────────────────────────────────────
 // 공급자 정보 설정
 // ─────────────────────────────────────────────
