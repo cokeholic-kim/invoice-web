@@ -50,3 +50,6 @@ shrimp-rules.md
 
 # project docs (generated)
 docs/PRD.md
+
+# exported data
+*.csv
