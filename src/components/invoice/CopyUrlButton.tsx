@@ -3,29 +3,31 @@
 // URL 복사 버튼 컴포넌트 - 클립보드 복사 기능을 위한 Client Component
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 
 interface CopyUrlButtonProps {
-  /** 복사할 URL 문자열 */
+  /** 복사할 URL 문자열 (절대 또는 상대 경로) */
   url: string;
   /** 추가 CSS 클래스 */
   className?: string;
 }
 
 export function CopyUrlButton({ url, className }: CopyUrlButtonProps) {
-  // 복사 완료 상태 (체크 아이콘 표시용)
   const [copied, setCopied] = useState(false);
 
-  // TODO: 실제 클립보드 복사 로직 구현 - 현재는 플레이스홀더
   const handleCopy = async () => {
-    // TODO: 클립보드 복사 및 토스트 알림 구현
     try {
-      await navigator.clipboard.writeText(url);
+      // 상대 경로인 경우 현재 origin을 붙여 절대 URL로 변환
+      const absoluteUrl = url.startsWith("http")
+        ? url
+        : `${window.location.origin}${url}`;
+      await navigator.clipboard.writeText(absoluteUrl);
       setCopied(true);
-      // 2초 후 원래 상태로 복원
+      toast.success("URL이 클립보드에 복사되었습니다.");
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // TODO: 복사 실패 시 에러 처리
+      toast.error("URL 복사에 실패했습니다. 직접 복사해 주세요.");
     }
   };
 

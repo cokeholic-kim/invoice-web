@@ -100,7 +100,7 @@ export function InvoiceListCard({ invoice, viewerUrl }: InvoiceListCardProps) {
         {/* URL 영역 */}
         <div className="mt-3 flex items-center gap-1 rounded-md bg-muted/50 px-2 py-1.5">
           <span className="min-w-0 flex-1 truncate text-xs font-mono text-muted-foreground">
-            {viewerUrl}
+            /invoice/{invoice.id}
           </span>
           <CopyUrlButton url={viewerUrl} className="shrink-0 h-6 w-6 p-0" />
         </div>

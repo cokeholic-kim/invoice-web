@@ -1,16 +1,15 @@
 // 견적서 목록 페이지 - 관리자용 대시보드, 발행된 견적서 목록을 표시하는 Server Component
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import { FileText, ArrowUpDown } from "lucide-react";
 import { InvoiceListTable } from "@/components/invoice/InvoiceListTable";
 import { InvoiceListCard } from "@/components/invoice/InvoiceListCard";
 import { getInvoiceList, toUserFriendlyError } from "@/lib/notion-client";
 
-// 노션 API를 매 요청마다 호출 (빌드 시 정적 생성 방지)
-export const dynamic = "force-dynamic";
+// ISR: 5분마다 데이터 재검증 (노션 데이터 변경 반영)
+export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: "견적서 관리 | invoice-web",
+  title: "견적서 관리",
   description: "발행된 견적서 목록을 확인하고 공유 URL을 복사하세요.",
 };
 
@@ -23,12 +22,8 @@ export default async function Home() {
     throw toUserFriendlyError(error);
   }
 
-  // 요청 헤더에서 호스트 정보를 가져와 절대 URL 구성
-  // TODO: 환경변수(NEXT_PUBLIC_BASE_URL)로 대체 권장
-  const headersList = await headers();
-  const host = headersList.get("host") ?? "localhost:3000";
-  const protocol = host.startsWith("localhost") ? "http" : "https";
-  const baseUrl = `${protocol}://${host}`;
+  // 환경변수 또는 기본값으로 baseUrl 구성 (ISR 캐싱 호환)
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "";
 
   return (
     <div className="space-y-6">

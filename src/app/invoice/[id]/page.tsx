@@ -1,5 +1,6 @@
 // 견적서 뷰어 페이지 - 특정 견적서의 전체 내용을 표시하는 Server Component
-export const dynamic = "force-dynamic";
+// ISR: 1시간마다 데이터 재검증 (견적서 데이터는 자주 변경되지 않음)
+export const revalidate = 3600;
 
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -19,7 +20,7 @@ interface InvoicePageProps {
   params: Promise<{ id: string }>;
 }
 
-// 동적 메타데이터 생성
+// 동적 메타데이터 생성 (SEO + OpenGraph)
 export async function generateMetadata({
   params,
 }: InvoicePageProps): Promise<Metadata> {
@@ -27,16 +28,28 @@ export async function generateMetadata({
   try {
     const invoice = await getInvoiceById(id);
     if (invoice) {
+      const title = `견적서 ${invoice.invoiceNumber}`;
+      const description = `${invoice.clientName}님 앞 견적서 — ${invoice.issueDate} 발행`;
       return {
-        title: `견적서 ${invoice.invoiceNumber} | invoice-web`,
-        description: `${invoice.clientName} 견적서`,
+        title,
+        description,
+        openGraph: {
+          title: `${title} | invoice-web`,
+          description,
+          type: "article",
+          locale: "ko_KR",
+        },
+        robots: {
+          index: false,
+          follow: false,
+        },
       };
     }
   } catch {
     // 메타데이터 생성 실패는 페이지 렌더링에 영향을 주지 않도록 무시
   }
   return {
-    title: "견적서 | invoice-web",
+    title: "견적서",
   };
 }
 

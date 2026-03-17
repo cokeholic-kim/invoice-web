@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,8 +15,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "invoice-web",
+  title: {
+    default: "invoice-web",
+    template: "%s | invoice-web",
+  },
   description: "노션 기반 견적서 공유 시스템",
+  openGraph: {
+    title: "invoice-web",
+    description: "노션 기반 견적서 공유 시스템",
+    type: "website",
+    locale: "ko_KR",
+  },
 };
 
 export default function RootLayout({
@@ -48,6 +58,8 @@ export default function RootLayout({
             &copy; {new Date().getFullYear()} invoice-web
           </div>
         </footer>
+
+        <Toaster position="bottom-right" richColors closeButton />
       </body>
     </html>
   );

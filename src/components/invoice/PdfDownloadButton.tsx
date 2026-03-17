@@ -3,6 +3,7 @@
 // PDF 다운로드 버튼 컴포넌트 - Client Component (클릭 이벤트 처리)
 import { useState } from "react";
 import { Download, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 
 interface PdfDownloadButtonProps {
@@ -77,9 +78,10 @@ export function PdfDownloadButton({
       const fileName = `견적서_${invoiceNumber}_${safeClientName}.pdf`;
 
       pdf.save(fileName);
+      toast.success("PDF 다운로드가 완료되었습니다.");
     } catch (error) {
       console.error("PDF 생성 실패:", error);
-      alert("PDF 생성 중 오류가 발생했습니다. 다시 시도해 주세요.");
+      toast.error("PDF 생성 중 오류가 발생했습니다. 다시 시도해 주세요.");
     } finally {
       setIsGenerating(false);
     }
