@@ -34,7 +34,7 @@ export function PdfDownloadButton({
       }
 
       // 동적 임포트로 번들 사이즈 최적화
-      const html2canvas = (await import("html2canvas")).default;
+      const html2canvas = (await import("html2canvas-pro")).default;
       const { jsPDF } = await import("jspdf");
 
       // html2canvas로 견적서 영역을 캡처
