@@ -175,8 +175,10 @@ invoice-web은 1인 개발자(관리자)와 견적서 수신 클라이언트를 
     - ✅ ESLint 통과
     - ✅ Playwright 25/26 통과 (1건 기존 한글 폰트 이슈 — 코드 변경 무관)
 
-- **Task 011: Vercel 배포**
-  - Vercel 배포 설정
-  - 환경변수 설정 가이드 작성 (NOTION_API_KEY, NOTION_DATABASE_ID, 공급자 정보)
-  - 프로덕션 빌드 테스트 및 검증
-  - 배포 후 전체 기능 E2E 테스트
+- **Task 011: Vercel 배포** 🔧 - 설정 완료, 배포 대기
+  - ✅ next.config.ts 프로덕션 설정 (standalone 출력, 보안 헤더)
+  - ✅ .env.example git 추적 활성화 (배포 가이드 역할)
+  - ✅ 환경변수 설정 가이드 작성 (`docs/DEPLOYMENT.md`)
+  - ✅ 프로덕션 빌드 테스트 및 검증 (standalone 76MB, ESLint 통과)
+  - ⏳ Vercel 로그인 후 `vercel --prod` 실행으로 배포 진행
+  - ⏳ 배포 후 전체 기능 E2E 테스트
